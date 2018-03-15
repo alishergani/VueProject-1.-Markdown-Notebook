@@ -1,0 +1,14 @@
+{
+	"name": "",
+	"version": "",
+	"dependencies": {},
+	"devDependencies": {
+		"@pingy/cli": "^0.12.4",
+		"node-sass": "^4",
+		"vue": "^2.5.16"
+	},
+	"scripts": {
+		"start": "pingy dev",
+		"export": "pingy export"
+	}
+}
