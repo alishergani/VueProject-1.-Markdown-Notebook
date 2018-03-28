@@ -3,8 +3,14 @@
 	"version": "",
 	"dependencies": {},
 	"devDependencies": {
+<<<<<<< HEAD
 		"node-sass": "^4",
 		"@pingy/cli": "^0.12.4"
+=======
+		"@pingy/cli": "^0.12.4",
+		"node-sass": "^4",
+		"vue": "^2.5.16"
+>>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
 	},
 	"scripts": {
 		"start": "pingy dev",

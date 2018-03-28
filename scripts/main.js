@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 Vue.filter('date', time => moment(time).format('DD/MM/YY, HH:mm'))
 
@@ -126,3 +127,18 @@ new Vue({
     },
   },
 })
+=======
+new Vue({
+	el: '#app', 
+	data() {
+		return {
+			content: ""
+		}
+	},
+	computed: {
+		notePreview() {
+			return marked(this.content)
+		}
+	}
+})
+>>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
