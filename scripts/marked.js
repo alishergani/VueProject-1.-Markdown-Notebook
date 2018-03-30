@@ -168,13 +168,8 @@ Lexer.prototype.token = function(src, top) {
       space,
       i,
       tag,
-<<<<<<< HEAD
       l,
       isordered;
-=======
-      l;
->>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
-
   while (src) {
     // newline
     if (cap = this.rules.newline.exec(src)) {
@@ -288,19 +283,12 @@ Lexer.prototype.token = function(src, top) {
     if (cap = this.rules.list.exec(src)) {
       src = src.substring(cap[0].length);
       bull = cap[2];
-<<<<<<< HEAD
       isordered = bull.length > 1;
 
       this.tokens.push({
         type: 'list_start',
         ordered: isordered,
         start: isordered ? +bull : ''
-=======
-
-      this.tokens.push({
-        type: 'list_start',
-        ordered: bull.length > 1
->>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
       });
 
       // Get each top-level item.
@@ -854,16 +842,10 @@ Renderer.prototype.hr = function() {
   return this.options.xhtml ? '<hr/>\n' : '<hr>\n';
 };
 
-<<<<<<< HEAD
 Renderer.prototype.list = function(body, ordered, start) {
   var type = ordered ? 'ol' : 'ul',
       startatt = (ordered && start !== 1) ? (' start="' + start + '"') : '';
   return '<' + type + startatt + '>\n' + body + '</' + type + '>\n';
-=======
-Renderer.prototype.list = function(body, ordered) {
-  var type = ordered ? 'ol' : 'ul';
-  return '<' + type + '>\n' + body + '</' + type + '>\n';
->>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
 };
 
 Renderer.prototype.listitem = function(text) {
@@ -1124,22 +1106,14 @@ Parser.prototype.tok = function() {
     }
     case 'list_start': {
       body = '';
-<<<<<<< HEAD
       var ordered = this.token.ordered,
           start = this.token.start;
-=======
-      var ordered = this.token.ordered;
->>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
 
       while (this.next().type !== 'list_end') {
         body += this.tok();
       }
 
-<<<<<<< HEAD
       return this.renderer.list(body, ordered, start);
-=======
-      return this.renderer.list(body, ordered);
->>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
     }
     case 'list_item_start': {
       body = '';
@@ -1350,11 +1324,8 @@ function marked(src, opt, callback) {
     if (opt) opt = merge({}, marked.defaults, opt);
     return Parser.parse(Lexer.lex(src, opt), opt);
   } catch (e) {
-<<<<<<< HEAD
     e.message += '\nPlease report this to https://github.com/markedjs/marked.';
-=======
-    e.message += '\nPlease report this to https://github.com/chjj/marked.';
->>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
+
     if ((opt || marked.defaults).silent) {
       return '<p>An error occurred:</p><pre>'
         + escape(e.message + '', true)
@@ -1418,8 +1389,4 @@ if (typeof module !== 'undefined' && typeof exports === 'object') {
 } else {
   root.marked = marked;
 }
-<<<<<<< HEAD
 })(this || (typeof window !== 'undefined' ? window : global));
-=======
-})(this || (typeof window !== 'undefined' ? window : global));
->>>>>>> 89b53e23337534f9f84647b3392fcb6c14e0b2df
