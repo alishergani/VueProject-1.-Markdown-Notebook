@@ -1,7 +1,4 @@
-Vue.filter('date', time => moment(time).format('DD/MM/YY, HH:mm'))
-
-// New VueJS instance
-new Vue({
+const vm = new Vue({
   el: '#notebook',
   // Some data
   data () {
@@ -20,9 +17,14 @@ new Vue({
     notePreview () {// Markdown rendered to HTML
       return this.selectedNote ? marked(this.selectedNote.content) : ''
     },
-    sortedNotes () {
-      return this.notes.slice().sort((a, b) => a.created - b.created)
-      .sort((a, b) => (a.favorite === b.favorite)? 0 : a.favorite? -1 : 1)
+    sortedNotes () {//Pins to top favorite notes 
+      return this.notes.slice()
+          .sort((a, b) =>  { //sorting by created time 
+            a.created - b.created
+          })
+          .sort((a, b) => { //pushing favorite notes in front of else notes 
+            (a.favorite === b.favorite) ? 0 : (a.favorite ? -1 : 1)
+          })
     },
     linesCount () {
       if (this.selectedNote) {// Count the number of new line characters
@@ -69,10 +71,10 @@ new Vue({
       const note = {
         id: String(time),
         title: 'New note ' + (this.notes.length + 1),
-        content: `**Hi!** This notebook is using [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) 
-        for formatting!`,
+        content: `**Hi!** This notebook is 
+        using [markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) for formatting!`,
         created: time,
-        favorite: false,
+        favorite: false
       }
       // Push the object below to notes-array
       this.notes.push(note)
@@ -92,6 +94,8 @@ new Vue({
     selectNote (note) {
       // This will update the 'selectedNote' computed property
       this.selectedId = note.id
+      console.log(vm.selectedId)
+      console.log(vm.selectedNote)
     },
 
     saveNotes () {
@@ -106,4 +110,9 @@ new Vue({
       this.selectedNote.favorite ^= true
     },
   },
+  filters: {
+    date:  (time) => {
+      return moment(time).format('DD/MM/YY, HH:mm')
+    }
+  }
 })
