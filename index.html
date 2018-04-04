@@ -30,6 +30,7 @@
         	@click="selectNote(note)">
         	<i class="icon material-icons" v-if="note.favorite">star</i>
         	{{note.title}}
+          <span class="title-placeholder" v-if="!note.title">Give it a name</span>
         </div>
       </div>
     </aside>
