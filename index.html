@@ -1,85 +1,42 @@
 <html>
 <head>
-  <title>Markdown Notebook</title>
+  <title>Notebook</title>
+  <!-- Icons & Stylesheets -->
+  <link rel="shortcut icon" href="https://avatars3.githubusercontent.com/u/14019896?s=400&u=aa91a56cef516b3e082a117759bfd761dd6c4ef4&v=4" type="image/x-icon">
   <link rel="stylesheet" href="styles/style.css"/>
 </head>
 <body>
-  <script src="scripts/libs/vue.js"></script>
+  <!-- Include the library in the page -->
   <script src="scripts/libs/marked.js"></script>
   <script src="scripts/libs/moment.js"></script>
+  <script src="scripts/libs/vue.js"></script>
+
   <!-- Notebook app -->
   <div id="notebook">
-<!--     <div id="test">
-      {{sortedNotes}}
-    </div> -->
-    <!-- Sidebar -->
+
     <aside class="side-bar">
       <div class="toolbar">
         <button 
-  				@click="addNote" 
-  				:title="notes.length + ' note(s) already'">
-  				<i class="material-icons">add</i>
-  				Add note
+                @click="addNote"
+                :title="addButtonTitle">
+          <i class="material-icons">add</i>Add note
         </button>
       </div>
       <div class="notes">
-        <div 
-        	class="note" 
-        	v-for="note of sortedNotes" 
-        	:class="{selected: note === selectedNote}" 
-        	@click="selectNote(note)">
-        	<i class="icon material-icons" v-if="note.favorite">star</i>
-        	{{note.title}}
-          <span class="title-placeholder" v-if="!note.title">Give it a name</span>
-        </div>
+        <div class="note" v-for="note in notes">{{note.title}}</div>
       </div>
     </aside>
+    <!-- Main pane -->
+    <section class="main">
+      <textarea v-model="content" placeholder="Note content"></textarea>
+    </section>
 
-    <template v-if="selectedNote">
-      <!-- Main pane -->
-      <section class="main">
-        <div class="toolbar">
-          <input v-model="selectedNote.title" placeholder="Note title" />
-
-          <button 
-          	@click="favoriteNote" 
-          	title="Favorite note">
-            <i class="material-icons">{{ selectedNote.favorite ? 'star' : 'star_border' }}</i>
-          </button>
-
-          <button 
-          	@click="removeNote"
-          	title="Remove note">
-            <i class="material-icons">delete</i>
-          </button>
-        </div>
-        <div class="toolbar status-bar">
-          <span class="date">
-            <span class="label">Created</span>
-            <span class="value">{{ selectedNote.created | date }}</span>
-          </span>
-          <span class="lines">
-            <span class="label">Lines</span>
-            <span class="value">{{ linesCount }}</span>
-          </span>
-          <span class="words">
-            <span class="label">Words</span>
-            <span class="value">{{ wordsCount }}</span>
-          </span>
-          <span class="characters">
-            <span class="label">Characters</span>
-            <span class="value">{{ charactersCount }}</span>
-          </span>
-        </div>
-        <textarea v-model="selectedNote.content"></textarea>
-      </section>
-      <!-- Preview pane -->
-      <aside class="preview" v-html="notePreview"></aside>
-    </template>
+    <!-- Preview pane -->
+    <aside class="preview" v-html="notePreview"></aside>
 
   </div>
 
   <!-- Some JavaScript -->
-  <script src="scripts/main.js"></script>
+  <script src="scripts/script.js"></script>
 </body>
 </html>
